@@ -16,9 +16,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class CatFactFragment : Fragment() {
 
-    lateinit var factTextView : TextView
-    lateinit var nextButton : Button
-    val soundList = listOf(
+    lateinit var factTextView: TextView
+    lateinit var nextButton: Button
+    private val soundList = listOf(
         R.raw.meow_1,
         R.raw.meow_2,
         R.raw.meow_3,
@@ -42,39 +42,39 @@ class CatFactFragment : Fragment() {
         setupViews(view)
 
         nextButton.setOnClickListener {
-        it.isClickable = false
+            it.isClickable = false
 
-        //meow sound logic
-        val soundRes = soundList[(1..7).random()]
-        val mediaPlayer = MediaPlayer.create(context, soundRes)
-        mediaPlayer.start()
+            //meow sound logic
+            val soundRes = soundList[(0..6).random()]
+            val mediaPlayer = MediaPlayer.create(context, soundRes)
+            mediaPlayer.start()
 
-        val retrofit = Retrofit.Builder().baseUrl("https://catfact.ninja/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
+            val retrofit = Retrofit.Builder().baseUrl("https://catfact.ninja/")
+                .addConverterFactory(GsonConverterFactory.create()).build()
 
-        val catFactApi = retrofit.create(CatFactApi::class.java)
+            val catFactApi = retrofit.create(CatFactApi::class.java)
 
-        val call = catFactApi.getPosts()
+            val call = catFactApi.getPosts()
 
-        call.enqueue(
-            object : Callback<Fact?> {
-                override fun onResponse(call: Call<Fact?>, response: Response<Fact?>) {
-                    it.isClickable = true
+            call.enqueue(
+                object : Callback<Fact?> {
+                    override fun onResponse(call: Call<Fact?>, response: Response<Fact?>) {
+                        it.isClickable = true
 
-                    if(!response.isSuccessful) {
-                        factTextView.text = "Code: " + response.code()
-                        return
+                        if (!response.isSuccessful) {
+                            factTextView.text = "Code: " + response.code()
+                            return
+                        }
+
+                        factTextView.text = response.body()?.fact
                     }
 
-                    val fact = response.body()
-                    factTextView.text = response.body()?.fact
+                    override fun onFailure(call: Call<Fact?>, t: Throwable) {
+                        factTextView.text = t.message
+                        it.isClickable = true
+                    }
                 }
-                override fun onFailure(call: Call<Fact?>, t: Throwable) {
-                    factTextView.text = t.message
-                    it.isClickable = true
-                }
-            }
-        )
+            )
         }
     }
 

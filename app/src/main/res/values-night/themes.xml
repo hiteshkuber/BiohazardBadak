@@ -4,8 +4,8 @@
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/light_prussian_blue</item>
+        <item name="colorPrimaryVariant">@color/prussian_blue</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -13,7 +13,8 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <item name="default_bg">@drawable/dark_bg</item>
         <!-- Customize your theme here. -->
+        <item name="default_bg">@drawable/dark_bg</item>
+        <item name="text_colour">@color/steel_blue</item>
     </style>
 </resources>
