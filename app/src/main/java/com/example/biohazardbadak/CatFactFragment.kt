@@ -1,5 +1,6 @@
 package com.example.biohazardbadak
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,15 @@ class CatFactFragment : Fragment() {
 
     lateinit var factTextView : TextView
     lateinit var nextButton : Button
+    val soundList = listOf(
+        R.raw.meow_1,
+        R.raw.meow_2,
+        R.raw.meow_3,
+        R.raw.meow_4,
+        R.raw.meow_5,
+        R.raw.meow_6,
+        R.raw.meow_7
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +43,11 @@ class CatFactFragment : Fragment() {
 
         nextButton.setOnClickListener {
         it.isClickable = false
+
+        //meow sound logic
+        val soundRes = soundList[(1..7).random()]
+        val mediaPlayer = MediaPlayer.create(context, soundRes)
+        mediaPlayer.start()
 
         val retrofit = Retrofit.Builder().baseUrl("https://catfact.ninja/")
             .addConverterFactory(GsonConverterFactory.create()).build()
