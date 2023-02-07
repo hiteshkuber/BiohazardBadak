@@ -32,6 +32,8 @@ class CatFactFragment : Fragment() {
         setupViews(view)
 
         nextButton.setOnClickListener {
+        it.isClickable = false
+
         val retrofit = Retrofit.Builder().baseUrl("https://catfact.ninja/")
             .addConverterFactory(GsonConverterFactory.create()).build()
 
@@ -42,6 +44,8 @@ class CatFactFragment : Fragment() {
         call.enqueue(
             object : Callback<Fact?> {
                 override fun onResponse(call: Call<Fact?>, response: Response<Fact?>) {
+                    it.isClickable = true
+
                     if(!response.isSuccessful) {
                         factTextView.text = "Code: " + response.code()
                         return
@@ -52,6 +56,7 @@ class CatFactFragment : Fragment() {
                 }
                 override fun onFailure(call: Call<Fact?>, t: Throwable) {
                     factTextView.text = t.message
+                    it.isClickable = true
                 }
             }
         )
