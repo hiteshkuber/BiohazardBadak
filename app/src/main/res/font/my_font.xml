@@ -4,5 +4,5 @@
 
     <font
         android:fontWeight="400"
-        android:font="@font/little_monster_font" />
+        android:font="@font/party_confetti_font" />
 </font-family>

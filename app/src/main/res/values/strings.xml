@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cat fact</string>
+    <string name="app_name">Purrfact</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="next_fact">Next fact</string>
     <string name="hint_text">Press next button for fun cat fact</string>
